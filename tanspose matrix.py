@@ -1,25 +1,14 @@
-N = 4
- 
-def transpose(A,B):
- 
- for i in range(N):
-  for j in range(N):
-   B[i][j] = A[j][i]
- 
+def transpose_matrix(matrix):
+    transposed = []
+    for i in range(len(matrix[0])):
+        row = []
+        for j in range(len(matrix)):
+            row.append(matrix[j][i])
+        transposed.append(row)
+    return transposed
 
-A = [ [1, 1, 1, 1],
- [2, 2, 2, 2],
- [3, 3, 3, 3],
- [4, 4, 4, 4]]
- 
- 
-B = A[:][:] 
- 
-transpose(A, B)
- 
-print("Result matrix is")
-for i in range(N):
- for j in range(N):
-  print(B[i][j], " ", end='')
- print()
-  
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+transposed = transpose_matrix(matrix)
+
+for row in transposed:
+    print(row)
