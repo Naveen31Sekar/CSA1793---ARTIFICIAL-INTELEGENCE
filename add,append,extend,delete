@@ -1,0 +1,29 @@
+
+my_list = []
+
+
+def add():
+    item = input("Enter item to add: ")
+    my_list.append(item)
+    print(my_list)
+
+
+def append():
+    items = input("Enter comma-separated items to append: ").split(",")
+    my_list.extend(items)
+    print(my_list)
+
+def extend():
+    iterable = input("Enter comma-separated iterable to extend: ").split(",")
+    my_list.extend(iterable)
+    print(my_list)
+
+def delete():
+    item = input("Enter item to delete: ")
+    my_list.remove(item)
+    print(my_list)
+
+add()
+append()
+extend()
+delete()
