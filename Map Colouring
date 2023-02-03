@@ -1,0 +1,40 @@
+from typing import Dict, List
+
+def map_coloring(colors: List[str], regions: List[str], neighbors: Dict[str, List[str]]) -> Dict[str, str]:
+    def is_valid(assignment: Dict[str, str]) -> bool:
+        for region, color in assignment.items():
+            for neighbor in neighbors[region]:
+                if neighbor in assignment and assignment[neighbor] == color:
+                    return False
+        return True
+
+    def backtrack(assignment: Dict[str, str]) -> Dict[str, str]:
+        if len(assignment) == len(regions):
+            return assignment
+
+        unassigned = [r for r in regions if r not in assignment]
+        first = unassigned[0]
+        for color in colors:
+            assignment[first] = color
+            if is_valid(assignment):
+                result = backtrack(assignment)
+                if result is not None:
+                    return result
+            del assignment[first]
+        return None
+    
+    return backtrack({})
+
+colors = ["red", "green", "blue"]
+regions = ["Western Australia", "Northern Territory", "South Australia", "Queensland", "New South Wales", "Victoria", "Tasmania"]
+neighbors = {
+    "Western Australia": ["Northern Territory", "South Australia"],
+    "Northern Territory": ["Western Australia", "South Australia", "Queensland"],
+    "South Australia": ["Western Australia", "Northern Territory", "Queensland", "New South Wales", "Victoria"],
+    "Queensland": ["Northern Territory", "South Australia", "New South Wales"],
+    "New South Wales": ["South Australia", "Queensland", "Victoria"],
+    "Victoria": ["South Australia", "New South Wales", "Tasmania"],
+    "Tasmania": ["Victoria"],
+}
+
+print(map_coloring(colors, regions, neighbors))
