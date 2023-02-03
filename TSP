@@ -1,0 +1,19 @@
+import itertools
+import math
+
+def traveling_salesman(points, start=0):
+    min_distance = math.inf
+    best_path = None
+
+    for path in itertools.permutations(points):
+        distance = 0
+        for i in range(len(points) - 1):
+            distance += math.dist(path[i], path[i + 1])
+        if distance < min_distance:
+            min_distance = distance
+            best_path = path
+
+    return best_path, min_distance
+
+points = [(0, 0), (0, 1), (1, 0), (1, 1)]
+print(traveling_salesman(points))
